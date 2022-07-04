@@ -59,7 +59,6 @@ Then you can set `--data-path Your own path/dataset/sysu` or `--data-path Your o
 
 * Hardware
    * Support  and GPU environment.
-   * For :  910.
    * For GPU: cuda==10.1.
 * Framework
    * Mindspore=1.5.0(See [Installation](https://www.mindspore.cn/install/))
@@ -79,14 +78,7 @@ cd DDAG_mindspore/scripts/ # please enter this path before bash XXX.sh, otherwis
 bash run_standalone_train_sysu_all_gpu.sh
 ```
 
-or
 
-For :
-
-```shell
-cd DDAG_mindspore/scripts/ # please enter this path before bash XXX.sh, otherwise path errors :)
-bash run_standalone_train_sysu_all_.sh
-```
 
 ## Pretrain Checkpoint File
 
@@ -216,12 +208,6 @@ cd DDAG_mindspore/scripts/run_standalone_gpu # please enter this path before bas
 bash train_sysu_all_part_graph.sh
 ```
 
-For ：
-
-```shell
-cd DDAG_mindspore/scripts/run_standalone_ # please enter this path before bash XXX.sh, otherwise path errors :)
-bash train_sysu_all_part_graph.sh
-```
 
 You can replace `train_sysu_all_part_graph.sh` with other training scripts.
 
@@ -259,12 +245,7 @@ cd DDAG_mindspore/scripts/run_eval_gpu # please enter this path before bash XXX.
 bash test_sysu_all_part_graph.sh
 ```
 
-For :
 
-```shell
-cd DDAG_mindspore/scripts/run_eval_ # please enter this path before bash XXX.sh, otherwise path errors :)
-bash test_sysu_all_part_graph.sh
-```
 
 ### Evaluation Result
 
@@ -283,39 +264,39 @@ FC_att:   Rank-1: 57.42% | Rank-5: 82.59% | Rank-10: 90.91%| Rank-20: 96.17%| mA
 
 ### Training Performance
 
-| Parameters                 |  910                                                   | GPU(RTX Titan) |
-| -------------------------- | ------------------------------------------------------------ | ----------------------------------------------|
-| Model Version              | DDAG + baseline(modified resnet50*) + Part Attention + Graph Attention | DDAG + baseline (modified resnet50) + Part Attention + Graph Attention |
-| Resource                   |  910; CPU 2.60GHz, 192cores; Memory 755G; OS Euler2.8  |  NVIDIA RTX Titan-24G        |
-| uploaded Date              | 12/10/2021 (month/day/year)                      | 12/10/2021 (month/day/year)           |
-| MindSpore Version          | 1.3.0, 1.5.0                                             | 1.3.0, 1.5.0                                  |
-| Dataset                    | SYSU-MM01, RegDB                              | SYSU-MM01, RegDB           |
-| Training Parameters（SYSU-MM01） | Epochs=40, steps per epoch=695, batch_size = 64 | epoch=40, steps per epoch=64 batch_size = 64 |
-| Training Parameters（RegDB） | Epochs=80, steps per epoch=695, batch_size = 64 | epoch=80, steps per epoch=64 batch_size = 64 |
-| Optimizer                  | Adam                                                 | Adam                                  |
-| Loss Function              | Softmax Cross Entropy + Triplet Loss                         | Softmax Cross Entropy + Triplet Loss          |
-| outputs                    | feature vector + probability                              | feature vector + probability               |
-| Loss                       | 0.2121                                           |  0.2208              |
-| Speed                      | 660 ms/step（1pcs, Graph Mode）                           | 250ms/step（1pcs, Graph Mode）       |
-| Total time                 | About 5h                                              | About                          |
-| Parameters (M)             | 122.7                                           | 122.7                                 |
-| Checkpoint for Fine tuning | 197M (.ckpt file)                                          | 196 (.ckpt file)                          |
-| Scripts                    | [link](https://gitee.com/mindspore/models/tree/master/research/cv/DDAG) ||
+| Parameters                 |  GPU(RTX Titan) |
+| -------------------------- |  ----------------------------------------------|
+| Model Version              |  DDAG + baseline (modified resnet50) + Part Attention + Graph Attention |
+| Resource                   |    NVIDIA RTX Titan-24G        |
+| uploaded Date              |  12/10/2021 (month/day/year)           |
+| MindSpore Version          |  1.3.0, 1.5.0                                  |
+| Dataset                    |  SYSU-MM01, RegDB           |
+| Training Parameters（SYSU-MM01） |  epoch=40, steps per epoch=64 batch_size = 64 |
+| Training Parameters（RegDB） |  epoch=80, steps per epoch=64 batch_size = 64 |
+| Optimizer                  | Adam                                  |
+| Loss Function              |  Softmax Cross Entropy + Triplet Loss          |
+| outputs                    |  feature vector + probability               |
+| Loss                       |  0.2208              |
+| Speed                      |  250ms/step（1pcs, Graph Mode）       |
+| Total time                 |  About                          |
+| Parameters (M)             |  122.7                                 |
+| Checkpoint for Fine tuning |  196 (.ckpt file)                          |
+| Scripts                    | [link](https://gitee.com/mindspore/models/tree/master/research/cv/DDAG) |
 
 *Note: Modified resnet-50 incorporates a modal-specific first layer. For more details, please read the [original paper](https://arxiv.org/pdf/2007.09314.pdf)  or original [pytorch implementation](https://github.com/mangye16/DDAG).
 
 ### Inference Performance
 
-| Parameters        |                                   | GPU(RTX Titan)                          |
-| ----------------- | --------------------------------------- | --------------------------------------- |
-| Model Version     | DDAG + Part Attention + Graph Attention | DDAG + Part Attention + Graph Attention |
-| Resource          |  910; OS Euler2.8                 | NVIDIA RTX Titan-24G                    |
-| Uploaded Date     | 12/10/2021 (month/day/year)             | 12/10/2021 (month/day/year)             |
-| MindSpore Version | 1.5.0, 1.3.0                            | 1.5.0, 1.3.0                            |
-| Dataset           | SYSU-MM01, RegDB                        | SYSU-MM01, RegDB                        |
-| batch_size        | 64                                      |                                         |
-| outputs           | feature                                 |                                         |
-| Accuracy          | See following 4 tables ↓                |                                         |
+| Parameters        |    GPU(RTX Titan)                          |
+| ----------------- |  --------------------------------------- |
+| Model Version     | DDAG + Part Attention + Graph Attention |
+| Resource          |   NVIDIA RTX Titan-24G                    |
+| Uploaded Date     |  12/10/2021 (month/day/year)             |
+| MindSpore Version |  1.5.0, 1.3.0                            |
+| Dataset           |  SYSU-MM01, RegDB                        |
+| batch_size        |                                          |
+| outputs           |                                          |
+| Accuracy          |                                         |
 
 ### SYSU-MM01 (all-search mode)
 
